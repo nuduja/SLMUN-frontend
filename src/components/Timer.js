@@ -15,6 +15,15 @@ export default function MyTimer({ expiryTimestamp }) {
     restart,
   } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
 
+  localStorage.setItem('seconds', seconds);
+  localStorage.setItem('minutes', minutes);
+  localStorage.setItem('hours', hours);
+  localStorage.setItem('days', days);
+  localStorage.setItem('isRunning', isRunning);
+  
+  //const bc = BroadcastChannel('timer');
+  //bc.postMessage({ seconds, minutes, hours, days, isRunning });
+
 
   return (
     <div style={{textAlign: 'center'}}>
