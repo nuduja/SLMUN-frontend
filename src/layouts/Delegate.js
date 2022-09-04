@@ -51,6 +51,7 @@ function Delegate() {
   const [hours, setHours] = useState(0);
   const [days, setDays] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [country, setCountry] = useState(0);
 
   
   //const bc = BroadcastChannel('timer');
@@ -63,11 +64,14 @@ function Delegate() {
     const hours = localStorage.getItem('hours');
     const days = localStorage.getItem('days');
     const isRunning = localStorage.getItem('isRunning');
+    const country = localStorage.getItem('country');
     setSeconds(seconds);
     setMinutes(minutes);
     setHours(hours);
     setDays(days);
     setIsRunning(isRunning);
+    setCountry(country);
+    console.log("hello");
 
   });
 
@@ -79,6 +83,7 @@ function Delegate() {
       <div style={{textAlign: 'center'}}>
         <h1>react-timer-hook </h1>
         <p>Timer Demo</p>
+        <p>{country}</p>
         <div style={{fontSize: '100px'}}>
           <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
         </div>

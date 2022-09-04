@@ -92,8 +92,10 @@ onDelete = (id) => {
 }  
 
 onClick = (NCountry) => {
+  // const { country } = this.state;
   this.setState({ SCountry:NCountry});
   console.log("onClick");
+  localStorage.setItem('country', this.state.SCountry);
 }  
 
 retriveCountries(){
