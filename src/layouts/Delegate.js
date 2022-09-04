@@ -46,8 +46,45 @@ function Delegate() {
     }
   }
 
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [days, setDays] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+
+  
+  //const bc = BroadcastChannel('timer');
+
+  //bc.onmessage = (e) => { console.log(e.seconds, e.minutes, e.hours, e.days, e.isRunning) };
+  
+  window.addEventListener('storage', () => {
+    const seconds = localStorage.getItem('seconds');
+    const minutes = localStorage.getItem('minutes');
+    const hours = localStorage.getItem('hours');
+    const days = localStorage.getItem('days');
+    const isRunning = localStorage.getItem('isRunning');
+    setSeconds(seconds);
+    setMinutes(minutes);
+    setHours(hours);
+    setDays(days);
+    setIsRunning(isRunning);
+
+  });
+
+
   return (
     <div className="container">
+
+
+      <div style={{textAlign: 'center'}}>
+        <h1>react-timer-hook </h1>
+        <p>Timer Demo</p>
+        <div style={{fontSize: '100px'}}>
+          <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+        </div>
+        <p>{isRunning ? 'Running' : 'Not running'}</p>
+        
+      </div>
 
       {/* Upload PDF */}
       <form>
