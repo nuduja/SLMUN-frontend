@@ -15,6 +15,7 @@ class dashboard extends React.Component {
 			time: "",
       countryD:"",
       country:"",
+      SCountry:"Country",
       Lcountries: []
     }
       
@@ -90,6 +91,11 @@ onDelete = (id) => {
   })
 }  
 
+onClick = (NCountry) => {
+  this.setState({ SCountry:NCountry});
+  console.log("onClick");
+}  
+
 retriveCountries(){
   axios.get(`http://localhost:8000/posts`)
       .then(res => {
@@ -112,12 +118,14 @@ retriveCountries(){
 
 	render() {
     let time = this.state.time;
+    let country = this.state.SCountry;
 
 
 
     
 		return (
             <div>
+              <p>{country}</p>
                 Hello
                 <Timer expiryTimestamp={time} />
           {/* <DropDown /> */}
@@ -130,7 +138,7 @@ retriveCountries(){
             .map(Lcountry =>
               <tr key={Lcountry._id}>
                 <td>{Lcountry._id}</td>
-                <td>{Lcountry.Country}</td>
+                <td ><div onClick = {() => this.onClick(Lcountry.Country)}>{Lcountry.Country}</div></td>
                 <td>
                   {/* <button type="button" onClick={this.handleClick(Lcountry._id)}>delete</button>  */}
                   <button type="button" onClick = {() => this.onDelete(Lcountry._id)}>delete</button> 
