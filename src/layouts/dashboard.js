@@ -4,6 +4,9 @@ import Timer from "../components/Timer";
 import DropDown from "../components/DropDown";
 import CList from "../components/CountryList.js/CList";
 import axios from 'axios';
+import {setSeconds} from "../reducers/clockSlice";
+import { connect } from "react-redux";
+import store from "../store/store";
 
 
 class dashboard extends React.Component {
@@ -109,12 +112,18 @@ handleFile(e){
 }
 
 handleInp(e){
-  localStorage.setItem('timerinp', e.target.value);
+  // localStorage.setItem('timerinp', e.target.value);
+  this.props.setSeconds(90);
+  console.log("sdfgdsgd");
+  //console.log(localStorage.getItem('timerinp'));
 }
 
 	render() {
     let time = this.state.time;
     let country = this.state.SCountry;
+
+    this.props.setSeconds(90);
+
     
 		return (
             <div>
@@ -160,10 +169,17 @@ handleInp(e){
             
         );
 	}
+  
 }
+const mapStateToProps = state => ({
+  seconds: state.seconds,
+});
 
+const mapDispatchToProps = () => ({ 
+  setSeconds, 
+});
 
-export default dashboard;
+export default connect (mapStateToProps,mapDispatchToProps())(dashboard);
 
 // class Child extends React.Component{
 //   //...
