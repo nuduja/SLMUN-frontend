@@ -1,0 +1,14 @@
+.button {
+  padding: 20px;
+  color: "red";
+
+}
+.buttonname {
+  padding: 20px;
+  color: "red";
+
+}
+
+.main-content {
+  height:500px;width:100%;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;
+}

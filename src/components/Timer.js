@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useTimer } from 'react-timer-hook';
 
 
@@ -9,6 +9,7 @@ export default function MyTimer({ expiryTimestamp }) {
     hours,
     days,
     isRunning,
+    timer,
     start,
     pause,
     resume,
@@ -20,15 +21,31 @@ export default function MyTimer({ expiryTimestamp }) {
   localStorage.setItem('hours', hours);
   localStorage.setItem('days', days);
   localStorage.setItem('isRunning', isRunning);
+  // localStorage.setItem('timerinp', 90);
+  // timer = localStorage.getItem('timerinp');
+  // console.log(localStorage.getItem(localStorage.getItem('timerinp')));
+  console.log(90);
+  const [timerinp, settimerinp] = useState(localStorage.getItem('timerinp'));
+  // settimerinp(90);
+
   
+  window.addEventListener('storage', () => {
+    const timerinp = localStorage.getItem('timerinp');
+   
+    settimerinp(timerinp);
+  });
+
+
+
+  // console.log(timer);
   //const bc = BroadcastChannel('timer');
   //bc.postMessage({ seconds, minutes, hours, days, isRunning });
-
+  // const [timerinp, settimerinp] = useState(90);
+  let timerinpp = timerinp;
 
   return (
     <div style={{textAlign: 'center'}}>
-      <h1>react-timer-hook </h1>
-      <p>Timer Demo</p>
+      
       <div style={{fontSize: '100px'}}>
         <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
       </div>
@@ -39,7 +56,7 @@ export default function MyTimer({ expiryTimestamp }) {
       <button onClick={() => {
         // Restarts to 5 minutes timer
         const time = new Date();
-        time.setSeconds(time.getSeconds() + 300);
+        time.setSeconds(time.getSeconds() + timerinp);
         restart(time)
       }}>Restart</button>
     </div>

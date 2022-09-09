@@ -6,8 +6,6 @@ import CList from "../components/CountryList.js/CList";
 import axios from 'axios';
 
 
-
-
 class dashboard extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,20 +25,14 @@ class dashboard extends React.Component {
     this.retriveCountries();
   }
 
-	componentDidUpdate(){
-		
-    console.log("Hello");
-    
-    this.state.time.setSeconds(this.state.time.getSeconds() + 700); // 10 minutes timer
-    
+	componentDidUpdate(){    
+    this.state.time.setSeconds(this.state.time.getSeconds() + 800); // 10 minutes timer    
 	}
   
-
-
 //   handleChangeValue = event => {this.setState({country: event.target.value});
 //   console.log("Hello1");
 // };
-handleChangeValue = v => {this.setState({countryD: v}, console.log("adfs" + v));
+handleChangeValue = v => {this.setState({countryD: v}, console.log(v));
   console.log("handlechange" + this.state.countryD);
 
 
@@ -62,13 +54,10 @@ handleChangeValue = v => {this.setState({countryD: v}, console.log("adfs" + v));
   axios.post("http://localhost:8000/post/save", {Country:v}).then(() => {
   // axios.post("http://localhost:8000/post/save", countries).then(() => {
     alert('Country added');
-})
-.catch(error => {
-    alert (error.message);
-});
-
-
-
+  })
+  .catch(error => {
+      alert (error.message);
+  });
 };
 
 
@@ -94,7 +83,7 @@ onDelete = (id) => {
 onClick = (NCountry) => {
   // const { country } = this.state;
   this.setState({ SCountry:NCountry});
-  console.log("onClick");
+  // console.log("onClick");
   localStorage.setItem('country', this.state.SCountry);
 }  
 
@@ -103,35 +92,42 @@ retriveCountries(){
       .then(res => {
         const Lcountriess = res.data.existingPosts;
         this.setState({ Lcountries:res.data.existingPosts });
-        console.log("existingposts" + res.data.existingPosts);
-        console.log(res.data.existingPosts);
-        console.log("Lcountries" + Lcountriess);
-        console.log(Lcountriess);
-        console.log("this.state.Lcountries");
-        console.log(this.state.Lcountries);
+        // console.log("existingposts" + res.data.existingPosts);
+        // console.log(res.data.existingPosts);
+        // console.log("Lcountries" + Lcountriess);
+        // console.log(Lcountriess);
+        // console.log("this.state.Lcountries");
+        // console.log(this.state.Lcountries);
       }).catch(error => {
         alert (error.message);
     });
 }
+handleFile(e){
+  localStorage.setItem('workingpaper', e.target.files[0]);
+  console.log(localStorage.getItem('workingpaper'));
+  console.log(e.target.files[0]);
+}
 
-
-
-
+handleInp(e){
+  localStorage.setItem('timerinp', e.target.value);
+}
 
 	render() {
     let time = this.state.time;
     let country = this.state.SCountry;
-
-
-
     
 		return (
             <div>
-              <p>{country}</p>
-                Hello
+              
+                
                 <Timer expiryTimestamp={time} />
+                <p>{country}</p>
           {/* <DropDown /> */}
-          <p>LIst f</p>
+          <input type='text' className="form-control"
+        onChange={this.handleInp}></input>
+          <input type='file' className="form-control"
+        onChange={this.handleFile}></input>
+          <h1>Countries Selected</h1>
           <table>
             <tbody>
             
@@ -139,7 +135,7 @@ retriveCountries(){
           this.state.Lcountries
             .map(Lcountry =>
               <tr key={Lcountry._id}>
-                <td>{Lcountry._id}</td>
+                {/* <td>{Lcountry._id}</td> */}
                 <td ><div onClick = {() => this.onClick(Lcountry.Country)}>{Lcountry.Country}</div></td>
                 <td>
                   {/* <button type="button" onClick={this.handleClick(Lcountry._id)}>delete</button>  */}
