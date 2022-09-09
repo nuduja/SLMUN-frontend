@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useTimer } from 'react-timer-hook';
-
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function MyTimer({ expiryTimestamp }) {
   const {
@@ -29,15 +29,15 @@ export default function MyTimer({ expiryTimestamp }) {
   // settimerinp(90);
 
   
-  window.addEventListener('storage', () => {
-    const timerinp = localStorage.getItem('timerinp');
-   
-    settimerinp(timerinp);
-  });
 
+  //timerinp = localStorage.getItem('timerinp');
 
+  
+  //settimerinp(timerinp);
+  const sec = useSelector((state) => state.clock.seconds);
+  console.log(sec);
 
-  // console.log(timer);
+  //console.log(timerinp);
   //const bc = BroadcastChannel('timer');
   //bc.postMessage({ seconds, minutes, hours, days, isRunning });
   // const [timerinp, settimerinp] = useState(90);
@@ -56,7 +56,7 @@ export default function MyTimer({ expiryTimestamp }) {
       <button onClick={() => {
         // Restarts to 5 minutes timer
         const time = new Date();
-        time.setSeconds(time.getSeconds() + timerinp);
+        time.setSeconds(time.getSeconds() + sec);
         restart(time)
       }}>Restart</button>
     </div>
