@@ -1,4 +1,6 @@
 import React from "react";
+import { useTimer } from 'react-timer-hook';
+import { useSelector, useDispatch } from 'react-redux'
 import Timer from "../components/Timer";
 // import CountryDropDown from "../components/CountryDropDown";
 import DropDown from "../components/DropDown";
@@ -17,19 +19,23 @@ class dashboard extends React.Component {
       countryD:"",
       country:"",
       SCountry:"Country",
+      timeSec:"",
       Lcountries: []
     }
-      
+      this.handleInp = this.handleInp.bind(this);
+      this.handletimer = this.handletimer.bind(this);
       // this.handleClick = this.handleClick.bind(this);
 	}
 
   componentDidMount() {
     this.state.time = new Date();
     this.retriveCountries();
+    // const sec = useSelector((state) => state.clock.seconds);
+    
   }
 
 	componentDidUpdate(){    
-    this.state.time.setSeconds(this.state.time.getSeconds() + 800); // 10 minutes timer    
+    // this.state.time.setSeconds(this.state.time.getSeconds() + 800); // 10 minutes timer    
 	}
   
 //   handleChangeValue = event => {this.setState({country: event.target.value});
@@ -113,17 +119,31 @@ handleFile(e){
 
 handleInp(e){
   // localStorage.setItem('timerinp', e.target.value);
-  this.props.setSeconds(90);
-  console.log("sdfgdsgd");
+  // this.props.setSeconds(80);
+ 
+  // e.preventDefault;
+  this.state.timeSec = e.target.value;
+
+  console.log("handleinp" + this.state.timeSec);
+  this.handletimer();
   //console.log(localStorage.getItem('timerinp'));
+}
+handletimer() {
+  const timesecc = this.state.timeSec;
+    console.log("timesecc" + timesecc);
+    console.log("this.state.time");
+    this.props.setSeconds(timesecc);
+    const sec = this.props.seconds;
 }
 
 	render() {
     let time = this.state.time;
     let country = this.state.SCountry;
-
-    this.props.setSeconds(90);
-
+    // const timesecc = this.state.time;
+    
+  // console.log("hello" + sec);
+    
+    
     
 		return (
             <div>
@@ -137,6 +157,7 @@ handleInp(e){
           <input type='file' className="form-control"
         onChange={this.handleFile}></input>
           <h1>Countries Selected</h1>
+          {/* {sec} */}
           <table>
             <tbody>
             

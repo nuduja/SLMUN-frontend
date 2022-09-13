@@ -35,7 +35,7 @@ export default function MyTimer({ expiryTimestamp }) {
   
   //settimerinp(timerinp);
   const sec = useSelector((state) => state.clock.seconds);
-  console.log(sec);
+  console.log("sec" + sec);
 
   //console.log(timerinp);
   //const bc = BroadcastChannel('timer');
